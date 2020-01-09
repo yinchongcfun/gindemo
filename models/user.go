@@ -2,11 +2,12 @@ package models
 
 import (
 	"errors"
+	"fmt"
 	"gindemo/database"
 	"gindemo/middleware/jwt"
 	jwtgo "github.com/dgrijalva/jwt-go" //需要安装 然后调用这个jwt-go包
 	"github.com/jinzhu/gorm"
-	"log"
+	"strconv"
 	"time"
 )
 
@@ -19,7 +20,7 @@ type User struct {
 
 type LoginResult struct {
 	User  interface{} `json:"user"`
-	Token string `json:"token"`
+	Token string      `json:"token"`
 }
 
 func (User) TableName() string {
@@ -33,6 +34,14 @@ func (u *User) Login(name string, password string) (token LoginResult, err error
 		return
 	}
 	generateToken := GenerateToken(user)
+	if err != nil {
+		fmt.Println(err)
+	}
+	userKey := "user:" + strconv.Itoa(user.Id);
+	_, err = database.RedisExec("set", userKey, generateToken.Token)
+	if err != nil {
+		fmt.Println(err)
+	}
 	return generateToken, nil
 }
 
@@ -83,8 +92,6 @@ func GenerateToken(user User) LoginResult {
 			Token: token,
 		}
 	}
-
-	log.Println(token)
 	data := LoginResult{
 		User:  user,
 		Token: token,

@@ -4,6 +4,7 @@ import (
 	"fmt"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jinzhu/gorm"
+	"github.com/spf13/viper"
 	"log"
 )
 
@@ -13,7 +14,6 @@ type Mysql struct {
 	IpHost   string
 	DbName   string
 }
-
 
 type MyLogger struct {
 }
@@ -36,15 +36,18 @@ var GormPool *gorm.DB
 
 func InitMysql() {
 	var err error
-	GormPool, err = gorm.Open("mysql", "blog:123456@tcp(118.24.93.185:3306)/blog?parseTime=true")
-
-	//logger:=&MyLogger{}
+	//driver:=viper.GetString("mysql.driver")
+	username := viper.GetString("database.username")
+	password := viper.GetString("database.password")
+	host := viper.GetString("database.host")
+	port := viper.GetInt("database.port")
+	dbname := viper.GetString("database.dbname")
+	dsn := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?charset=utf8&parseTime=True&loc=Local", username, password, host, port, dbname)
+	GormPool, err = gorm.Open("mysql", dsn)
 	GormPool.LogMode(true)
-
 	if err != nil {
 		fmt.Printf("mysql connect error %v", err)
 	}
-
 	if GormPool.Error != nil {
 		fmt.Printf("database error %v", GormPool.Error)
 	}

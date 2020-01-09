@@ -2,7 +2,6 @@ package controller
 
 import (
 	"errors"
-	"fmt"
 	"gindemo/dto"
 	"gindemo/middleware"
 	"gindemo/middleware/jwt"
@@ -18,7 +17,6 @@ func Login(c *gin.Context) {
 		return
 	}
 	user := &models.User{}
-	fmt.Println(loginInput)
 	token, err := user.Login(loginInput.UserName, loginInput.Password)
 	if err != nil {
 		if err.Error() == "record not found" {
@@ -43,7 +41,6 @@ func Register(c *gin.Context) {
 	user.Name = registerInput.UserName
 	user.Password = registerInput.Password
 	user.Email = registerInput.Email
-	fmt.Printf("email:%s,password:%s,name:%s",user.Email,user.Password,user.Name)
 	if err := user.Register(); err != nil {
 		middleware.ResponseError(c, 2007, err)
 		return

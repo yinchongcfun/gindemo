@@ -2,7 +2,6 @@ package jwt
 
 import (
 	"errors"
-	"fmt"
 	"gindemo/middleware"
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
@@ -23,7 +22,6 @@ func JWTAuth() gin.HandlerFunc {
 		j := NewJWT()
 		// parseToken 解析token包含的信息
 		claims, err := j.ParseToken(token)
-		fmt.Println("claims", claims)
 		if err != nil {
 			if err == TokenExpired {
 				middleware.ResponseError(c, -1, errors.New("授权已过期"))

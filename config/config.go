@@ -5,16 +5,16 @@ import (
 	"os"
 )
 
+
 func InitConfig() {
 	path, err := os.Getwd()
 	if err != nil {
 		panic(err)
 	}
-	config := viper.New()
-	config.AddConfigPath(path)
-	config.SetConfigName("./config/dev/config")
-	config.SetConfigType("yaml")
-	if err:=config.ReadInConfig();err!=nil{
+	viper.AddConfigPath(path + "/config/dev")
+	viper.SetConfigName("config")
+	viper.SetConfigType("yaml")
+	if err := viper.ReadInConfig(); err != nil {
 		panic(err)
 	}
 }
