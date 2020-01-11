@@ -5,7 +5,10 @@ import (
 	"gindemo/database"
 	"gindemo/public"
 	"gindemo/router"
+	"github.com/sirupsen/logrus"
 )
+
+var log = logrus.New()
 
 func main() {
 	config.InitConfig()
