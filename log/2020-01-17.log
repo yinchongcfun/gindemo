@@ -1,0 +1,3 @@
+time="2020-01-17T17:20:24+08:00" level=info msg="小明ddd来了" age=12 name=xiaoming sex=1 traceId="97e1e2a6-390a-11ea-8481-f218985eef15 "
+time="2020-01-17T17:20:24+08:00" level=error msg="小红来了" age=13 name=xiaohong sex=0 traceId="97e1e2a6-390a-11ea-8481-f218985eef15 "
+time="2020-01-17T17:20:24+08:00" level=fatal msg="小芳来了" age=14 name=xiaofang sex=1 traceId="97e1e2a6-390a-11ea-8481-f218985eef15 "
