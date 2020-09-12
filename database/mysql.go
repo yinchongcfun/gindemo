@@ -51,4 +51,9 @@ func InitMysql() {
 	if GormPool.Error != nil {
 		fmt.Printf("database error %v", GormPool.Error)
 	}
+
+	//viper.WatchConfig()
+	//viper.OnConfigChange(func(e fsnotify.Event) {
+	//	fmt.Println("Config file changed:", e.Name)
+	//})
 }

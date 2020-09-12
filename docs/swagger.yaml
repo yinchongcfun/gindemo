@@ -1,0 +1,24 @@
+host: localhost:8080
+info:
+  contact:
+    email: youngxhui@g mail.com
+    url: https://youngxhui.top
+  description: Gin swagger 示例项目
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  title: Gin swagger
+  version: "1.0"
+paths:
+  /user/{id}:
+    get:
+      consumes:
+      - application/x-json-stream
+      description: 通过id获取用户
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: integer
+swagger: "2.0"

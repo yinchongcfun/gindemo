@@ -28,16 +28,27 @@ func (Article) TableName() string {
 //	return
 //}
 
-//func (a *Article) ListArticle(title string) (Article, error) {
+//func ListArticle(title string) (articles []Article, err error) {
 //	query := database.GormPool
-//	var article Article
-//	query.Where("title like ?", "%"+title+"%").First(&article)
-//	err := query.Model(&article).Related(&article.Tag, "Tag").Find(&article).Error
+//	err = query.Model(articles).
+//		Where("title like ?", "%"+title+"%").
+//		Preload("Category").Find(&articles).Error
 //	if err != nil && err != gorm.ErrRecordNotFound {
-//		return article, nil
+//		return
 //	}
-//	return article, err
+//	return
 //}
+
+func (a *Article) ListArticle(title string) (Article, error) {
+	query := database.GormPool
+	var article Article
+	query.Where("title like ?", "%"+title+"%").First(&article)
+	err := query.Model(&article).Related(&article.Tag, "Tag").Find(&article).Error
+	if err != nil && err != gorm.ErrRecordNotFound {
+		return article, nil
+	}
+	return article, err
+}
 
 //func (a *Article) ListArticle(title string) (Article, error) {
 //	query := database.GormPool
@@ -67,14 +78,14 @@ func (Article) TableName() string {
 //}
 
 //多对多
-func (a *Article) ListArticle(title string) (articles []Article, err error) {
-	query := database.GormPool
-	err = query.Model(articles).
-		Where("title like ?", "%"+title+"%").
-		Preload("Category").
-		Preload("Tag").Find(&articles).Error
-	if err != nil && err != gorm.ErrRecordNotFound {
-		return
-	}
-	return
-}
+//func (a *Article) ListArticle(title string) (articles []Article, err error) {
+//	query := database.GormPool
+//	err = query.Model(articles).
+//		Where("title like ?", "%"+title+"%").
+//		Preload("Category").
+//		Preload("Tag").Find(&articles).Error
+//	if err != nil && err != gorm.ErrRecordNotFound {
+//		return
+//	}
+//	return
+//}

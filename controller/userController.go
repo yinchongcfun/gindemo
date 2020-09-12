@@ -2,6 +2,7 @@ package controller
 
 import (
 	"errors"
+	"fmt"
 	"gindemo/dto"
 	"gindemo/middleware"
 	"gindemo/middleware/jwt"
@@ -49,6 +50,7 @@ func Register(c *gin.Context) {
 	return
 }
 
+
 func UserList(c *gin.Context) {
 	var user models.User
 	claims := c.MustGet("claims").(*jwt.CustomClaims)
@@ -57,4 +59,14 @@ func UserList(c *gin.Context) {
 		log.Fatal(err)
 	}
 	middleware.ResponseSuccess(c, users)
+}
+
+
+// @description 通过id获取用户
+// @version 1.0
+// @accept application/x-json-stream
+// @param id path int true "id"
+// @router /user/{id} [get]
+func UserGet(ctx *gin.Context) {
+	fmt.Print("ws")
 }
