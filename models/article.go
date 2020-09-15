@@ -28,16 +28,16 @@ func (a *Article) ListArticle1(title string) (articles []Article, err error) {
 	return
 }
 
-//func ListArticle2(title string) (articles []Article, err error) {
-//	query := database.GormPool
-//	err = query.Model(articles).
-//		Where("title like ?", "%"+title+"%").
-//		Preload("Category").Find(&articles).Error
-//	if err != nil && err != gorm.ErrRecordNotFound {
-//		return
-//	}
-//	return
-//}
+func ListArticle2(title string) (articles []Article, err error) {
+	query := database.GormPool
+	err = query.Model(articles).
+		Where("title like ?", "%"+title+"%").
+		Preload("Category").Find(&articles).Error
+	if err != nil && err != gorm.ErrRecordNotFound {
+		return
+	}
+	return
+}
 
 func (a *Article) ListArticle(title string) (Article, error) {
 	query := database.GormPool
@@ -50,16 +50,16 @@ func (a *Article) ListArticle(title string) (Article, error) {
 	return article, err
 }
 
-//func (a *Article) ListArticle3(title string) (Article, error) {
-//	query := database.GormPool
-//	var article Article
-//	query.Where("title like ?", "%"+title+"%").First(&article)
-//	err := query.Model(&article).Association("Category").Find(&article.Category).Error
-//	if err != nil && err != gorm.ErrRecordNotFound {
-//		return article, nil
-//	}
-//	return article, err
-//}
+func (a *Article) ListArticle3(title string) (Article, error) {
+	query := database.GormPool
+	var article Article
+	query.Where("title like ?", "%"+title+"%").First(&article)
+	err := query.Model(&article).Association("Category").Find(&article.Category).Error
+	if err != nil && err != gorm.ErrRecordNotFound {
+		return article, nil
+	}
+	return article, err
+}
 
 //远程一对多
 func (a *Article) ListArticle4(title string) (Article, error) {
@@ -77,14 +77,14 @@ func (a *Article) ListArticle4(title string) (Article, error) {
 }
 
 //多对多
-//func (a *Article) ListArticle(title string) (articles []Article, err error) {
-//	query := database.GormPool
-//	err = query.Model(articles).
-//		Where("title like ?", "%"+title+"%").
-//		Preload("Category").
-//		Preload("Tag").Find(&articles).Error
-//	if err != nil && err != gorm.ErrRecordNotFound {
-//		return
-//	}
-//	return
-//}
+func (a *Article) ListArticle5(title string) (articles []Article, err error) {
+	query := database.GormPool
+	err = query.Model(articles).
+		Where("title like ?", "%"+title+"%").
+		Preload("Category").
+		Preload("Tag").Find(&articles).Error
+	if err != nil && err != gorm.ErrRecordNotFound {
+		return
+	}
+	return
+}
