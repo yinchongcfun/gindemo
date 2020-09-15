@@ -17,49 +17,49 @@ func (Article) TableName() string {
 	return "article"
 }
 
-func (a *Article) ListArticle1(title string) (articles []Article, err error) {
-	query := database.GormPool
-	err = query.Model(articles).
-		Where("title like ?", "%"+title+"%").
-		Preload("Category").Find(&articles).Error
-	if err != nil && err != gorm.ErrRecordNotFound {
-		return
-	}
-	return
-}
+//func (a *Article) ListArticle1(title string) (articles []Article, err error) {
+//	query := database.GormPool
+//	err = query.Model(articles).
+//		Where("title like ?", "%"+title+"%").
+//		Preload("Category").Find(&articles).Error
+//	if err != nil && err != gorm.ErrRecordNotFound {
+//		return
+//	}
+//	return
+//}
 
-func ListArticle2(title string) (articles []Article, err error) {
-	query := database.GormPool
-	err = query.Model(articles).
-		Where("title like ?", "%"+title+"%").
-		Preload("Category").Find(&articles).Error
-	if err != nil && err != gorm.ErrRecordNotFound {
-		return
-	}
-	return
-}
+//func ListArticle2(title string) (articles []Article, err error) {
+//	query := database.GormPool
+//	err = query.Model(articles).
+//		Where("title like ?", "%"+title+"%").
+//		Preload("Category").Find(&articles).Error
+//	if err != nil && err != gorm.ErrRecordNotFound {
+//		return
+//	}
+//	return
+//}
 
-func (a *Article) ListArticle(title string) (Article, error) {
-	query := database.GormPool
-	var article Article
-	query.Where("title like ?", "%"+title+"%").First(&article)
-	err := query.Model(&article).Related(&article.Tag, "Tag").Find(&article).Error
-	if err != nil && err != gorm.ErrRecordNotFound {
-		return article, nil
-	}
-	return article, err
-}
+//func (a *Article) ListArticle(title string) (Article, error) {
+//	query := database.GormPool
+//	var article Article
+//	query.Where("title like ?", "%"+title+"%").First(&article)
+//	err := query.Model(&article).Related(&article.Tag, "Tag").Find(&article).Error
+//	if err != nil && err != gorm.ErrRecordNotFound {
+//		return article, nil
+//	}
+//	return article, err
+//}
 
-func (a *Article) ListArticle3(title string) (Article, error) {
-	query := database.GormPool
-	var article Article
-	query.Where("title like ?", "%"+title+"%").First(&article)
-	err := query.Model(&article).Association("Category").Find(&article.Category).Error
-	if err != nil && err != gorm.ErrRecordNotFound {
-		return article, nil
-	}
-	return article, err
-}
+//func (a *Article) ListArticle3(title string) (Article, error) {
+//	query := database.GormPool
+//	var article Article
+//	query.Where("title like ?", "%"+title+"%").First(&article)
+//	err := query.Model(&article).Association("Category").Find(&article.Category).Error
+//	if err != nil && err != gorm.ErrRecordNotFound {
+//		return article, nil
+//	}
+//	return article, err
+//}
 
 //远程一对多
 func (a *Article) ListArticle4(title string) (Article, error) {
