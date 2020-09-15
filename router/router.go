@@ -1,9 +1,8 @@
 package router
 
 import (
+	"gindemo/controller"
 	"github.com/gin-gonic/gin"
-	swaggerFiles "github.com/swaggo/files"
-	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
 func InitRouter() *gin.Engine {
@@ -21,7 +20,8 @@ func InitRouter() *gin.Engine {
 	////文章相关
 	//articleRoute := router.Group("article")
 	//articleRoute.GET("/list", controller.ArticleList)
-	url := ginSwagger.URL("http://localhost:8080/swagger/doc.json")
-	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler, url))
+	//url := ginSwagger.URL("http://localhost:8080/swagger/doc.json")
+	//router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler, url))
+	router.GET("/configtest", controller.AddConfigTest)
 	return router
 }

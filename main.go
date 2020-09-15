@@ -35,8 +35,9 @@ func initLog() {
 func main() {
 	initLog()
 	config.InitConfig()
-	database.InitMysql()
-	database.InitRedis()
+	//database.InitMysql()
+	//database.InitRedis()
+	database.InitMongo()
 	public.InitValidate()
 	router := router.InitRouter()
 	router.Run()
