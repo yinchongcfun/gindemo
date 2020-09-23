@@ -75,8 +75,8 @@ func (a *Article) ListArticle4(title string) (Article, error) {
 	}
 	return article, err
 }
-//
-////多对多
+
+//多对多
 func (a *Article) ListArticle5(title string) (articles []Article, err error) {
 	query := database.GormPool
 	err = query.Model(articles).
