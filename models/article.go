@@ -62,19 +62,19 @@ func (a *Article) ListArticle3(title string) (Article, error) {
 }
 
 //远程一对多
-func (a *Article) ListArticle4(title string) (Article, error) {
-	query := database.GormPool
-	var article Article
-	query.Where("title like ?", "%"+title+"%").First(&article)
-	err := query.Model(&article).
-		Related(&article.Category).
-		Related(&article.Tag, "tag").
-		Find(&article).Error
-	if err != nil && err != gorm.ErrRecordNotFound {
-		return article, nil
-	}
-	return article, err
-}
+//func (a *Article) ListArticle4(title string) (Article, error) {
+//	query := database.GormPool
+//	var article Article
+//	query.Where("title like ?", "%"+title+"%").First(&article)
+//	err := query.Model(&article).
+//		Related(&article.Category).
+//		Related(&article.Tag, "tag").
+//		Find(&article).Error
+//	if err != nil && err != gorm.ErrRecordNotFound {
+//		return article, nil
+//	}
+//	return article, err
+//}
 //
 ////多对多
 //func (a *Article) ListArticle5(title string) (articles []Article, err error) {
